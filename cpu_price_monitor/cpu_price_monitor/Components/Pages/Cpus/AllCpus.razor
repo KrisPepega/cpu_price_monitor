@@ -1,0 +1,78 @@
+﻿@page "/Cpus"
+
+<div class="page">
+    <div class="left-pane">
+        <div class="left-top-pane">
+            <a style="text-decoration: none;" class="" href="/Cpus"> CPU Prices</a>
+        </div>
+        <div class="left-bottom-pane">
+            <div id="inputs" class="input-container">
+                
+                <label>Filters: </label>
+                <input @bind-value="PrIdFilter" @bind-value:event="oninput" placeholder="Search by Product Id" />
+                <input @bind-value="NameFilter" @bind-value:event="oninput" placeholder="Search by Name" />
+                <input @bind-value="DescriptionFilter" @bind-value:event="oninput" placeholder="Search by Description" />
+                <input @bind-value="BrandFilter" @bind-value:event="oninput" placeholder="Search by brand" />
+                <label>Average user rating: </label>
+                <input type="number" step="0.01" min=0 @bind-value="UserRatingMin" @bind-value:event="oninput" placeholder="Min rating" />
+                <input type="number" step="0.01" min=0 @bind-value="UserRatingMax" @bind-value:event="oninput" placeholder="Max rating" />
+                <label>Amount of ratings: </label>
+                <input type="number" min=0 @bind-value="TotalRatingsMin" @bind-value:event="oninput" placeholder="Min amount" />
+                <input type="number" min=0 @bind-value="TotalRatingsMax" @bind-value:event="oninput" placeholder="Max amount" />
+                <label>Best price:</label>
+                <input type="number" step="0.01" min=0 @bind-value="PriceMin" @bind-value:event="oninput" placeholder="Min price" />
+                <input type="number" step="0.01" min=0 @bind-value="PriceMax" @bind-value:event="oninput" placeholder="Max price" />
+            </div>
+        </div>
+    </div>
+@if (Cpus == null)
+{
+    <p><em>Loading.../ may be there is no data </em></p>
+}else
+{
+    <div class="cpu-page">
+        <table style="">
+            <thead style="display: table-header-group; table-layout:fixed; top: 0; padding: 10px;">
+                <tr>
+                    <th>Image</th>
+                    <th>Product Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Brand</th>
+                    <th>User rating</th>
+                    <th>Total</th>
+                    <th>Best price today</th>
+                    <th>Price history</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in FilteredCpus)
+                {
+                    <tr>
+                        @if (c.Img != null)
+                        {
+                            <td>
+                                <img src="@c.Img" width="100" height="100" />
+                            </td>
+                        }
+                        <td>@c.prId</td>
+                        <td>@c.Name</td>
+                        <td>@c.Description</td>
+                        <td>@c.Brand</td>
+                        <td>@c.UserRating</td>
+                        <td>@c.TotalRatings</td>
+                        <td>@(@c.LowestPrice / 100),@(@c.LowestPrice % 100) DKK</td>
+                        <td>
+                            <a href="/Cpus/@c.Id/Prices" class="btn btn-primary">Prices</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+</div>
+
+@code {
+
+}

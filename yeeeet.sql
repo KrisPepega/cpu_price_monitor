@@ -1,0 +1,2 @@
+DELETE FROM Prices WHERE Id > 0;
+DELETE FROM Cpus WHERE Id > 0;

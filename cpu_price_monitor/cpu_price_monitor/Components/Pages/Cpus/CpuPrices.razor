@@ -1,0 +1,56 @@
+﻿@page "/Cpus/{id:int}/Prices"
+<div class="page">
+    <div class="left-pane">
+        <div class="left-top-pane">
+            <a style="text-decoration: none;" class="" href="/Cpus"> CPU Prices</a>
+        </div>
+        <div class="left-bottom-pane">
+            <div id="inputs" class="input-container">
+
+                <label>Filters: </label>
+                <input type="number" @bind-value="IdFilter" @bind-value:event="oninput" placeholder="Search by Price id" />
+                <input type="number" @bind-value="CpuIdFilter" @bind-value:event="oninput" placeholder="Search by Cpu id" />
+                <label>Average user rating: </label>
+                <input type="number" step="0.01" min=0 @bind-value="PriceMin" @bind-value:event="oninput" placeholder="Min price" />
+                <input type="number" step="0.01" min=0 @bind-value="PriceMax" @bind-value:event="oninput" placeholder="Max price" />
+            </div>
+        </div>
+    </div>
+    <div class="price-page">
+        @if(Cpu != null)
+        {
+            <table style="">
+                <thead style="display: table-header-group; table-layout:fixed; top: 0; padding: 10px;">
+                    <tr>
+                        <th>Id</th>
+                        <th>Cpu Id</th>
+                        <th>Price</th>
+                        <th>Created at</th>
+                        <th>Vendor link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var p in FilteredPrices)
+                    {
+                        <tr>
+                            <td>@p.Id</td>
+                            <td>@p.CpuId</td>
+                            <td>@(@p.Value / 100),@(@p.Value % 100) DKK</td>
+                            <td>@p.DateTime</td>
+                            <td>
+                                <a href="@p.VendorLink">@p.VendorLink</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No price history found!</p>
+        }
+    </div>
+</div>
+@code {
+
+}
