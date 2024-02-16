@@ -3,6 +3,7 @@ SQL Server setup:
 1. Enable both Windows & SQL Server Authentication for SQL Server
 2. Create "CpuDb"
 3. You will need to create a login for the server & user for CpuDb which will be used in the db_handler.py.
+   Note: Ensure you assign the proper priveleges.
 
 Installing python requirements:
 
