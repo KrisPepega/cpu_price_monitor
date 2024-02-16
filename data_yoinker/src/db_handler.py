@@ -2,7 +2,7 @@ import pyodbc
 from datetime import datetime
 
 server = "YourServer"
-database = "YourDb"
+database = "CpuDb"
 username = "YourUsername"
 password = "YourPassword"
 driver = "{ODBC Driver 17 for SQL Server}"
